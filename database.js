@@ -23,4 +23,10 @@ function getAllIds() {
   return rows;
 }
 
-module.exports = { addId, getAllIds };
+function removeId(id) {
+  const stmt = db.prepare('DELETE FROM ids WHERE id = ?');
+  const result = stmt.run(id);
+  return result.changes > 0; // true - o'chirildi, false - bunday id topilmadi
+}
+
+module.exports = { addId, getAllIds, removeId };
